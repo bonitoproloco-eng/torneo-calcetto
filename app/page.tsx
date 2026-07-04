@@ -1,48 +1,51 @@
-import { partite } from "@/lib/data";
-export default function Home() {
-  const partitaLive = partite.find((p) => p.stato === "LIVE");
+import Header from "@/components/Header";
+import { getTeams } from "@/lib/teams";
+
+export default async function Home() {
+  const teams = await getTeams();
+
   return (
     <main className="min-h-screen bg-gray-100">
-      <header className="bg-green-600 text-white p-6 shadow">
-        <h1 className="text-3xl font-bold">🏆 Torneo di Calcetto</h1>
-        <p className="text-green-100">Girone unico + Finale</p>
-      </header>
 
-      <div className="max-w-4xl mx-auto p-6 space-y-6">
-        <section className="bg-white rounded-xl shadow p-5">
-          <h2 className="text-xl font-bold mb-3">📅 Prossima partita</h2>
+      <Header
+        title="Torneo Calcetto"
+        subtitle="5 Squadre • Girone Unico"
+      />
 
-          <div className="flex justify-between">
-            <div>
-              <h3 className="font-semibold">Real Bonito</h3>
-              <p>🆚</p>
-              <h3 className="font-semibold">Atletico</h3>
-            </div>
+      <div className="max-w-md mx-auto p-4">
 
-            <div className="text-right">
-              <p>10 Luglio</p>
-              <p className="font-bold">20:30</p>
-            </div>
+        <div className="bg-white rounded-xl shadow p-4">
+
+          <h2 className="text-xl font-bold mb-4">
+            🏆 Squadre
+          </h2>
+
+          <div className="space-y-2">
+
+            {teams.map((team) => (
+              <div
+                key={teams.id}
+                className="flex items-center justify-between border rounded-lg p-3"
+              >
+                <div className="flex items-center gap-3">
+
+                  <div
+                    className="w-4 h-4 rounded-full"
+                    style={{ backgroundColor: team.color }}
+                  />
+
+                  <span>{team.name}</span>
+
+                </div>
+              </div>
+            ))}
+
           </div>
-        </section>
 
-        <section className="bg-white rounded-xl shadow p-5">
-  <h2 className="text-xl font-bold mb-3 text-red-600">
-    🔴 Partita LIVE
-  </h2>
+        </div>
 
-  {partitaLive ? (
-    <div className="text-center">
-      <h3 className="text-2xl font-bold">
-        {partitaLive.casa} {partitaLive.golCasa} - {partitaLive.golOspite}{" "}
-        {partitaLive.ospite}
-      </h3>
-    </div>
-  ) : (
-    <p>Nessuna partita in corso.</p>
-  )}
-</section>
       </div>
+
     </main>
   );
 }

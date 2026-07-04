@@ -1,9 +1,5 @@
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+import BottomNavigation from "@/components/BottomNavigation";
 
 export const metadata = {
   title: "Torneo Calcetto",
@@ -12,14 +8,14 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="it" className={cn("font-sans", geist.variable)}>
-      <body className="pb-20 bg-gray-100">
+    <html lang="it">
+      <body>
         {children}
-        <Navbar />
+        <BottomNavigation />
       </body>
     </html>
   );

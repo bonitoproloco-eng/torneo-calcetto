@@ -1,26 +1,70 @@
-export default function Cannonieri() {
+import { getPlayers } from "@/lib/players";
+import { getTeams } from "@/lib/teams";
+
+export default async function CannonieriPage() {
+  const players = await getPlayers();
+  const teams = await getTeams();
+
+  const teamMap = Object.fromEntries(
+    teams.map((team) => [team.id, team.name])
+  );
+
+  const ranking = players
+    .sort((a, b) => b.goals - a.goals)
+    .filter((player) => player.goals > 0);
+
   return (
-    <main className="min-h-screen p-6 bg-gray-100">
-      <h1 className="text-3xl font-bold mb-6">⚽ Cannonieri</h1>
+    <main className="min-h-screen bg-gray-100">
 
-      <div className="bg-white rounded-xl shadow">
+      <div className="max-w-xl mx-auto p-6">
 
-        <div className="flex justify-between border-b p-4">
-          <span>Marco Rossi</span>
-          <span className="font-bold">5</span>
-        </div>
+        <h1 className="text-3xl font-bold mb-6">
+          🏆 Classifica Cannonieri
+        </h1>
 
-        <div className="flex justify-between border-b p-4">
-          <span>Luca Esposito</span>
-          <span className="font-bold">4</span>
-        </div>
+        {ranking.length === 0 ? (
 
-        <div className="flex justify-between p-4">
-          <span>Antonio Romano</span>
-          <span className="font-bold">3</span>
-        </div>
+          <div className="bg-white rounded-xl shadow p-6 text-center">
+            Nessun gol registrato.
+          </div>
+
+        ) : (
+
+          <div className="space-y-3">
+
+            {ranking.map((player, index) => (
+
+              <div
+                key={player.id}
+                className="bg-white rounded-xl shadow p-4 flex justify-between items-center"
+              >
+
+                <div>
+
+                  <div className="font-bold">
+                    #{index + 1} · {player.name}
+                  </div>
+
+                  <div className="text-sm text-gray-500">
+                    {teamMap[player.teamId]}
+                  </div>
+
+                </div>
+
+                <div className="text-3xl font-bold text-green-600">
+                  ⚽ {player.goals}
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        )}
 
       </div>
+
     </main>
   );
 }

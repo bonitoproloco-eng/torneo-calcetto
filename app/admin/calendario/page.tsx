@@ -14,6 +14,7 @@ export default async function CalendarioPage() {
   return (
     <main className="min-h-screen bg-gray-100">
       <div className="max-w-3xl mx-auto p-6">
+
         <h1 className="text-3xl font-bold mb-6">
           📅 Calendario
         </h1>
@@ -53,6 +54,7 @@ export default async function CalendarioPage() {
             </div>
           </div>
         ))}
+
       </div>
     </main>
   );
