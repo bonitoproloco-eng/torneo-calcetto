@@ -24,7 +24,7 @@ export default async function Home() {
 
             {teams.map((team) => (
               <div
-                key={teams.id}
+                key={team.id}
                 className="flex items-center justify-between border rounded-lg p-3"
               >
                 <div className="flex items-center gap-3">
