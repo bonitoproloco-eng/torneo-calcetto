@@ -37,7 +37,10 @@ export default function NuovoTorneoPage() {
 
       // Azzera i gol dei giocatori
       await resetPlayerGoals();
-
+        
+      // Azzera i goal
+      await resetPlayerGoals();
+      
       // Genera il nuovo calendario
       await saveMatches(schedule);
 

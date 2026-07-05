@@ -17,7 +17,19 @@ export interface Player {
   yellowCards: number;
   redCards: number;
 }
+export async function resetPlayersStats() {
+  const snapshot = await getDocs(collection(db, "players"));
 
+  await Promise.all(
+    snapshot.docs.map((player) =>
+      updateDoc(doc(db, "players", player.id), {
+        goals: 0,
+        yellowCards: 0,
+        redCards: 0,
+      })
+    )
+  );
+}
 export async function getPlayers(): Promise<Player[]> {
   const snapshot = await getDocs(collection(db, "players"));
 

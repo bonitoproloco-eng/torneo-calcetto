@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getPlayers } from "@/lib/players";
 import { getTeams } from "@/lib/teams";
 
