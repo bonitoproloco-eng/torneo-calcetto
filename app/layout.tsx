@@ -1,5 +1,6 @@
 import "./globals.css";
 import BottomNavigation from "@/components/BottomNavigation";
+import { AuthProvider } from "@/components/AuthProvider";
 
 export const metadata = {
   title: "Torneo Calcetto",
@@ -14,8 +15,10 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body>
-        {children}
-        <BottomNavigation />
+        <AuthProvider>
+          {children}
+          <BottomNavigation />
+        </AuthProvider>
       </body>
     </html>
   );

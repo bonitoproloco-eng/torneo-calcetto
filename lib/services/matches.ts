@@ -14,10 +14,17 @@ import { db } from "../firebase";
 export interface Match {
   id: string;
   round: number;
+
+  day: string;
+  date: string;
+  time: string;
+
   homeTeam: string;
   awayTeam: string;
+
   homeGoals: number;
   awayGoals: number;
+
   status: string;
 }
 

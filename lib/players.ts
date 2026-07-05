@@ -88,3 +88,22 @@ export async function removePlayerGoal(playerId: string) {
     goals: increment(-1),
   });
 }
+export async function resetPlayerGoals() {
+
+  const snapshot = await getDocs(collection(db, "players"));
+
+  await Promise.all(
+
+    snapshot.docs.map((player) =>
+
+      updateDoc(doc(db, "players", player.id), {
+
+        goals: 0,
+
+      })
+
+    )
+
+  );
+
+}

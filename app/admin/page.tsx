@@ -7,8 +7,6 @@ import {
   Users,
   User,
   CalendarDays,
-  Radio,
-  Settings,
 } from "lucide-react";
 
 const items = [
@@ -28,9 +26,9 @@ const items = [
   },
   {
 
-    title: "Calendario",
+    title: "Nuovo Torneo",
 
-    subtitle: "Genera il calendario",
+    subtitle: "Azzera e crea il nuovo torneo",
 
     href: "/admin/calendario/genera",
 
@@ -45,20 +43,6 @@ const items = [
     href: "/admin/partite",
     icon: CalendarDays,
     color: "bg-orange-500",
-  },
-  {
-    title: "LIVE",
-    subtitle: "Gestisci la partita live",
-    href: "/admin/live",
-    icon: Radio,
-    color: "bg-red-600",
-  },
-  {
-    title: "Impostazioni",
-    subtitle: "Configurazione torneo",
-    href: "/admin/impostazioni",
-    icon: Settings,
-    color: "bg-gray-700",
   },
 ];
 
@@ -87,6 +71,7 @@ const liveAwayTeam = liveMatch
       <Header
         title="Admin"
         subtitle="Pannello di controllo"
+        showLogout
       />
       <div className="max-w-md mx-auto p-4">
 
