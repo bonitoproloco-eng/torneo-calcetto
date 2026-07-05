@@ -38,7 +38,6 @@ export default function MatchControls({
     );
 
     if (!ok) return;
-
     await finishMatch(matchId);
     refresh();
   }
