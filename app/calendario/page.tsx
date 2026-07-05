@@ -1,6 +1,6 @@
+export const dynamic = "force-dynamic";
 import { getMatches } from "@/lib/services/matches";
 import { getTeams } from "@/lib/teams";
-
 export default async function CalendarioPage() {
   const matches = await getMatches();
   const teams = await getTeams();

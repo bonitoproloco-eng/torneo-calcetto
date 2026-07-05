@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getMatches } from "@/lib/services/matches";
 import { getTeams } from "@/lib/teams";
 import { calculateStandings } from "@/lib/utils/calculateStandings";
