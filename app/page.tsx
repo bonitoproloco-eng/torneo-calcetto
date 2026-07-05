@@ -171,23 +171,38 @@ export default async function Home() {
           <div className="space-y-2">
 
             {teams.map((team) => (
-              <div
-                key={team.id}
-                className="flex items-center gap-3 border rounded-lg p-3"
-              >
-                <div
-                  className="w-4 h-4 rounded-full"
-                  style={{
-                    backgroundColor: team.color,
-                  }}
-                />
+  <Link
+    key={team.id}
+    href={`/squadre/${team.id}`}
+  >
+    <div className="flex items-center justify-between border rounded-lg p-4 hover:bg-gray-50 transition cursor-pointer">
 
-                <span className="font-medium">
-                  {team.name}
-                </span>
+      <div className="flex items-center gap-3">
 
-              </div>
-            ))}
+        <div
+          className="w-4 h-4 rounded-full"
+          style={{ backgroundColor: team.color }}
+        />
+
+        <div>
+          <div className="font-semibold">
+            {team.name}
+          </div>
+
+          <div className="text-sm text-gray-500">
+            Tocca per vedere la rosa
+          </div>
+        </div>
+
+      </div>
+
+      <div className="text-2xl text-gray-400">
+        →
+      </div>
+
+    </div>
+  </Link>
+))}
 
           </div>
 
