@@ -30,7 +30,7 @@ const items = [
 
     subtitle: "Azzera e crea il nuovo torneo",
 
-    href: "/admin/calendario/genera",
+    href: "/admin/calendario/crea",
 
     icon: CalendarDays,
 
