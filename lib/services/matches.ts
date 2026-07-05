@@ -59,7 +59,7 @@ export async function saveMatches(matches: any[]) {
   )
 }
 export async function startMatch(matchId: string) {
-  // Controlla se esiste già una partita LIVE
+  // Controlla che non ci siano altre partite LIVE
   const snapshot = await getDocs(collection(db, "matches"));
 
   const liveMatch = snapshot.docs.find(
@@ -72,29 +72,7 @@ export async function startMatch(matchId: string) {
     throw new Error("Esiste già una partita LIVE.");
   }
 
-  const ref = doc(db, "matches", matchId);
-
-  const matchSnapshot = await getDoc(ref);
-
-  if (!matchSnapshot.exists()) return;
-
-  const match = matchSnapshot.data() as any;
-
-  // Riprendi da pausa
-  if (match.status === "paused") {
-    const pausedTime = Date.now() - match.pausedAt;
-
-    await updateDoc(ref, {
-      status: "live",
-      pausedAt: null,
-      pausedDuration: (match.pausedDuration ?? 0) + pausedTime,
-    });
-
-    return;
-  }
-
-  // Primo avvio
-  await updateDoc(ref, {
+  await updateDoc(doc(db, "matches", matchId), {
     status: "live",
   });
 }
@@ -103,12 +81,6 @@ export async function finishMatch(matchId: string) {
   await updateDoc(doc(db, "matches", matchId), {
     status: "finished",
     finishedAt: Date.now(),
-  });
-}
-export async function pauseMatch(matchId: string) {
-  await updateDoc(doc(db, "matches", matchId), {
-    status: "paused",
-    pausedAt: Date.now(),
   });
 }
 
