@@ -180,9 +180,16 @@ export default async function Home() {
       <div className="flex items-center gap-3">
 
         <div
-          className="w-4 h-4 rounded-full"
-          style={{ backgroundColor: team.color }}
-        />
+
+  className="w-6 h-6 rounded-full border-2 border-black"
+
+  style={{
+
+    background: team.color,
+
+  }}
+
+/>
 
         <div>
           <div className="font-semibold">
