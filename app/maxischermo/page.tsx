@@ -122,7 +122,7 @@ export default function MaxischermoPage() {
         {/* RISULTATO */}
         <div className="flex justify-center items-center">
 
-          <div className="text-[280px] font-black leading-none">
+          <div className="text-[400px] font-black leading-none">
             {match.homeGoals}
           </div>
 
@@ -130,7 +130,7 @@ export default function MaxischermoPage() {
             -
           </div>
 
-          <div className="text-[280px] font-black leading-none">
+          <div className="text-[400px] font-black leading-none">
             {match.awayGoals}
           </div>
 
