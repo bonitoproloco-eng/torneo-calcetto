@@ -1,6 +1,9 @@
 export const dynamic = "force-dynamic";
+
+import Link from "next/link";
 import { getMatches } from "@/lib/services/matches";
 import { getTeams } from "@/lib/teams";
+
 export default async function CalendarioPage() {
   const matches = await getMatches();
   const teams = await getTeams();
@@ -68,37 +71,71 @@ export default async function CalendarioPage() {
 
               <div className="divide-y">
 
-                {roundMatches.map((match) => (
-                  <div
-                    key={match.id}
-                    className="p-4"
-                  >
-                    <div className="text-center text-sm text-gray-500 mb-3">
-                      🕣 {match.time}
+                {roundMatches.map((match) => {
+
+                  const isFinished =
+                    match.status === "finished";
+
+                  const card = (
+                    <div
+                      className={`p-4 transition ${
+                        isFinished
+                          ? "hover:bg-gray-50 cursor-pointer"
+                          : ""
+                      }`}
+                    >
+
+                      <div className="text-center text-sm text-gray-500 mb-3">
+                        🕣 {match.time}
+                      </div>
+
+                      <div className="flex items-center justify-between">
+
+                        <div className="w-2/5 font-semibold">
+                          {teamMap[match.homeTeam]}
+                        </div>
+
+                        <div className="w-1/5 text-center font-bold text-lg">
+
+                          {isFinished
+                            ? `${match.homeGoals} - ${match.awayGoals}`
+                            : "VS"}
+
+                        </div>
+
+                        <div className="w-2/5 text-right font-semibold">
+                          {teamMap[match.awayTeam]}
+                        </div>
+
+                      </div>
+
+                      {isFinished && (
+                        <div className="mt-3 text-center text-sm font-semibold text-green-600">
+                          👁️ Vedi marcatori
+                        </div>
+                      )}
+
                     </div>
+                  );
 
-                    <div className="flex items-center justify-between">
-
-                      <div className="w-2/5 font-semibold">
-                        {teamMap[match.homeTeam]}
+                  if (!isFinished) {
+                    return (
+                      <div key={match.id}>
+                        {card}
                       </div>
+                    );
+                  }
 
-                      <div className="w-1/5 text-center font-bold text-lg">
+                  return (
+                    <Link
+                      key={match.id}
+                      href={`/partite/${match.id}`}
+                    >
+                      {card}
+                    </Link>
+                  );
 
-                        {match.status === "finished"
-                          ? `${match.homeGoals} - ${match.awayGoals}`
-                          : "VS"}
-
-                      </div>
-
-                      <div className="w-2/5 text-right font-semibold">
-                        {teamMap[match.awayTeam]}
-                      </div>
-
-                    </div>
-
-                  </div>
-                ))}
+                })}
 
               </div>
 

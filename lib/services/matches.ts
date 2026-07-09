@@ -254,3 +254,15 @@ export async function restartMatch(matchId: string) {
     status: "scheduled",
   });
 }
+export async function getMatchById(matchId: string) {
+  const ref = doc(db, "matches", matchId);
+
+  const snapshot = await getDoc(ref);
+
+  if (!snapshot.exists()) return null;
+
+  return {
+    id: snapshot.id,
+    ...(snapshot.data() as any),
+  };
+}
